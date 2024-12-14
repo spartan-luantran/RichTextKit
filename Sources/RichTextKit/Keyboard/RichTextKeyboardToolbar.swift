@@ -246,10 +246,12 @@ private extension RichTextKeyboardToolbar {
 
         @StateObject
         private var context = RichTextContext()
+      
+        @State private var desiredHeight: CGFloat = 0
 
         var body: some View {
             VStack(spacing: 0) {
-                RichTextEditor(text: $text, context: context)
+              RichTextEditor(text: $text, context: context, desiredHeight: $desiredHeight)
                     .background(Color.white)
                     .cornerRadius(10)
                     .padding()

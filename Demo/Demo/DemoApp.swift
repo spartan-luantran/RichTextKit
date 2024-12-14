@@ -13,23 +13,8 @@ import SwiftUI
 struct DemoApp: App {
 
     var body: some Scene {
-
-        DocumentGroup(newDocument: DemoDocument()) { file in
-            DemoEditorScreen(
-                document: file.$document
-            )
-        }
-        .commands {
-            SidebarCommands()
-            #if os(macOS)
-            AboutCommand()
-            #endif
-            RichTextCommand.FormatMenu()
-
-            CommandMenu("RichTextKit") {
-                DemoUrl.github.link
-                DemoUrl.documentation.link
-            }
-        }
+      WindowGroup {
+        TestView()
+      }
     }
 }

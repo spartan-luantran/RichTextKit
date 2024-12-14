@@ -25,9 +25,10 @@ public struct RichTextViewer: View {
 
     private let text: NSAttributedString
     private let context: RichTextContext
+    @State private var desiredHeight: CGFloat = 0
 
     public var body: some View {
-        RichTextEditor(text: .constant(text), context: context)
+      RichTextEditor(text: .constant(text), context: context, desiredHeight: $desiredHeight)
     }
 }
 #endif

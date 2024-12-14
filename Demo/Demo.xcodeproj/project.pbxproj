@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74F5A9AB2D0D357C00DAE134 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F5A9AA2D0D357C00DAE134 /* TestView.swift */; };
 		A983955A2B964EC200727A30 /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98395592B964EC200727A30 /* DemoApp.swift */; };
 		A983955C2B964EC200727A30 /* DemoDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983955B2B964EC200727A30 /* DemoDocument.swift */; };
 		A983955E2B964EC200727A30 /* DemoEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983955D2B964EC200727A30 /* DemoEditorScreen.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		74F5A9AA2D0D357C00DAE134 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A98395562B964EC200727A30 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98395592B964EC200727A30 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		A983955B2B964EC200727A30 /* DemoDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDocument.swift; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74F5A9A92D0D356700DAE134 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74F5A9AA2D0D357C00DAE134 /* TestView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A983954D2B964EC200727A30 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 		A98395582B964EC200727A30 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				74F5A9A92D0D356700DAE134 /* View */,
 				A9D8C48F2BB5C41100F77A36 /* Commands */,
 				A98395632B964EC300727A30 /* Preview Content */,
 				A98395722B96573700727A30 /* Supporting Files */,
@@ -427,6 +438,7 @@
 				A98395742B96684500727A30 /* AboutCommand.swift in Sources */,
 				A98395782B966B6100727A30 /* DemoUrl.swift in Sources */,
 				A983955A2B964EC200727A30 /* DemoApp.swift in Sources */,
+				74F5A9AB2D0D357C00DAE134 /* TestView.swift in Sources */,
 				A983955C2B964EC200727A30 /* DemoDocument.swift in Sources */,
 				A983955E2B964EC200727A30 /* DemoEditorScreen.swift in Sources */,
 				A98395712B96571100727A30 /* DemoMenu.swift in Sources */,

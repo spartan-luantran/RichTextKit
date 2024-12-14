@@ -66,12 +66,14 @@ public struct RichTextEditor: ViewRepresentable {
         text: Binding<NSAttributedString>,
         context: RichTextContext,
         format: RichTextDataFormat = .archivedData,
+        desiredHeight: Binding<CGFloat>,
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
         self._context = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
+      self._desiredHeight = desiredHeight
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void
@@ -88,6 +90,8 @@ public struct RichTextEditor: ViewRepresentable {
 
     @Environment(\.richTextEditorStyle)
     private var style
+  
+    @Binding var desiredHeight: CGFloat
 
     #if iOS || os(tvOS) || os(visionOS)
     public let textView = RichTextView()
@@ -119,7 +123,18 @@ public struct RichTextEditor: ViewRepresentable {
         return textView
     }
 
-    public func updateUIView(_ view: UIViewType, context: Context) {}
+    public func updateUIView(_ view: UIViewType, context: Context) {
+      guard let uiTextView = view as? UITextView else {
+        return
+      }
+      uiTextView.attributedText = text.wrappedValue
+      let fixedWidth = uiTextView.frame.size.width
+      let newSize = uiTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+      
+      DispatchQueue.main.async {
+        self.desiredHeight = newSize.height
+      }
+    }
 
     #else
 

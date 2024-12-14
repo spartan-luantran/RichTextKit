@@ -16,6 +16,8 @@ struct DemoEditorScreen: View {
     @State private var isInspectorPresented = false
 
     @StateObject var context = RichTextContext()
+  
+  @State private var desiredHeight: CGFloat = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -24,7 +26,8 @@ struct DemoEditorScreen: View {
             #endif
             RichTextEditor(
                 text: $document.text,
-                context: context
+                context: context,
+                desiredHeight: $desiredHeight
             ) {
                 $0.textContentInset = CGSize(width: 30, height: 30)
             }
