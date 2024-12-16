@@ -29,3 +29,27 @@ struct RichTextEditorWrapper: View {
         }
     }
 }
+
+struct RichTextEditorWrapper2: View {
+  @ObservedObject var data: EditorData
+  
+  @ObservedObject var context: RichTextContext
+  var onEditingChanged: (_ isEditing: Bool) -> Void
+  
+  @State var desiredHeight: CGFloat = 0
+  
+  var body: some View {
+    RichTextEditor(
+      text: $data.text,
+      context: context,
+      desiredHeight: $desiredHeight
+    )
+    .focusedValue(\.richTextContext, context)
+    .border(Color.yellow)
+    .richTextEditorConfig(RichTextEditorConfig(isScrollingEnabled: false))
+    .frame(height: max(desiredHeight, 24))
+    .onChange(of: context.isEditingText) { isEditing in
+      onEditingChanged(isEditing)
+    }
+  }
+}

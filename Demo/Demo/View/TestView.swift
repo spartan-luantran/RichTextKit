@@ -10,16 +10,31 @@ import RichTextKit
 struct TestView: View {
   private let numberOfEditors = 5
   
+  @StateObject var viewModel = TestViewModel()
+  
   @State private var texts: [NSAttributedString] = Array(repeating: NSAttributedString(string: "Type here..."), count: 5)
   @StateObject private var contexts = RichTextContexts(count: 5)
   @State private var desiredHeights: [CGFloat] = Array(repeating: 24, count: 5)
   
   @State private var selectedEditorIndex: Int? = nil
+  @State var selectedContext: RichTextContext?
   
   var body: some View {
     VStack {
       ScrollView {
         VStack(spacing: 16) {
+          ForEach(Array(viewModel.datas.enumerated()), id: \.element.id) { index, data in
+            RichTextEditorWrapper2(
+              data: data,
+              context: contexts.contexts[index],
+              onEditingChanged: { editing in
+                if editing {
+                  selectedEditorIndex = index
+                }
+              }
+            )
+          }
+          /*
           ForEach(0..<numberOfEditors, id: \.self) { index in
             RichTextEditorWrapper(
               text: $texts[index],
@@ -28,7 +43,7 @@ struct TestView: View {
               onEditingChanged: { editing in
                 if editing {
                   selectedEditorIndex = index
-                }x
+                }
               }
             )
             .background(
@@ -36,16 +51,18 @@ struct TestView: View {
                 .stroke(selectedEditorIndex == index ? Color.blue : Color.gray, lineWidth: selectedEditorIndex == index ? 2 : 1)
             )
             .padding(.horizontal)
-          }
+           
+          }*/
         }
         .padding(.top)
       }
       
       HStack {
         Button(action: {
-          applyBold()
+          //applyBold()
+          applyAlignCenter()
         }) {
-          Text("Bold")
+          Text("AlignCenter")
             .fontWeight(.bold)
         }
       }
@@ -60,7 +77,14 @@ struct TestView: View {
   
   private func applyBold() {
     guard let index = selectedEditorIndex else { return }
+    
     contexts.contexts[index].handle(.setStyle(.bold, true))
+  }
+  
+  private func applyAlignCenter() {
+    guard let index = selectedEditorIndex else { return }
+    
+    contexts.contexts[index].handle(.setAlignment(.center))
   }
 }
 

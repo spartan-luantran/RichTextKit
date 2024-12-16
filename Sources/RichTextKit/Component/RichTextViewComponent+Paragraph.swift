@@ -28,8 +28,8 @@ public extension RichTextViewComponent {
     /// > Todo: The function currently can't handle multiple
     /// selected paragraphs. If many paragraphs are selected,
     /// it will only affect the first one.
-    func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
-        let range = lineRange(for: selectedRange)
+    func setRichTextParagraphStyle(_ style: NSParagraphStyle, applyFull: Bool = false) {
+        let range = applyFull ? NSRange(location: 0, length: richText.length) : lineRange(for: selectedRange)
         guard range.length > 0 else { return }
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)

@@ -29,6 +29,6 @@ public extension RichTextViewComponent {
             from: richTextParagraphStyle,
             alignment: alignment
         )
-        setRichTextParagraphStyle(style)
+      setRichTextParagraphStyle(style, applyFull: true)
     }
 }
