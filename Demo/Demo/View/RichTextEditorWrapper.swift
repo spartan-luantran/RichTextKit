@@ -49,7 +49,8 @@ struct RichTextEditorWrapper2: View {
     .richTextEditorConfig(RichTextEditorConfig(isScrollingEnabled: false))
     .frame(height: max(desiredHeight, 24))
     .onChange(of: context.isEditingText) { isEditing in
+      print("isEditing: \(isEditing)")
       onEditingChanged(isEditing)
-    }
+    }.background(.red)
   }
 }

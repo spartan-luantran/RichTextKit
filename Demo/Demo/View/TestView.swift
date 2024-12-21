@@ -23,14 +23,12 @@ struct TestView: View {
     VStack {
       ScrollView {
         VStack(spacing: 16) {
-          ForEach(Array(viewModel.datas.enumerated()), id: \.element.id) { index, data in
+          ForEach(viewModel.datas, id: \.id) { data in
             RichTextEditorWrapper2(
               data: data,
-              context: contexts.contexts[index],
+              context: data.context,
               onEditingChanged: { editing in
-                if editing {
-                  selectedEditorIndex = index
-                }
+                
               }
             )
           }
@@ -60,7 +58,8 @@ struct TestView: View {
       HStack {
         Button(action: {
           //applyBold()
-          applyAlignCenter()
+          // applyAlignCenter()
+          viewModel.addMore()
         }) {
           Text("AlignCenter")
             .fontWeight(.bold)

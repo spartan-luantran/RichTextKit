@@ -41,4 +41,10 @@ final class TestViewModel: ObservableObject {
       datas.append(EditorData())
     }
   }
+  
+  func addMore() {
+    let data = EditorData()
+    data.context.toggleIsEditing()
+    datas.append(data)
+  }
 }

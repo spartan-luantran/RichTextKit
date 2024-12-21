@@ -75,7 +75,10 @@ open class RichTextCoordinator: NSObject {
     // MARK: - UITextViewDelegate
 
     open func textViewDidBeginEditing(_ textView: UITextView) {
-        context.isEditingText = true
+      DispatchQueue.main.async {
+        self.context.isEditingText = true
+      }
+        
     }
 
     open func textViewDidChange(_ textView: UITextView) {
@@ -88,7 +91,9 @@ open class RichTextCoordinator: NSObject {
 
     open func textViewDidEndEditing(_ textView: UITextView) {
         syncWithTextView()
-        context.isEditingText = false
+      DispatchQueue.main.async {
+        self.context.isEditingText = false
+      }
     }
     #endif
 
