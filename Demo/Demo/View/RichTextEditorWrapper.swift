@@ -47,10 +47,11 @@ struct RichTextEditorWrapper2: View {
     .focusedValue(\.richTextContext, context)
     .border(Color.yellow)
     .richTextEditorConfig(RichTextEditorConfig(isScrollingEnabled: false))
+    .richTextEditorStyle(data.richTextEditorStyle)
     .frame(height: max(desiredHeight, 24))
     .onChange(of: context.isEditingText) { isEditing in
       print("isEditing: \(isEditing)")
       onEditingChanged(isEditing)
-    }.background(.red)
+    }
   }
 }

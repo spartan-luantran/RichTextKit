@@ -8,18 +8,28 @@
 import RichTextKit
 import Combine
 import Foundation
+import UIKit
 
 class EditorData: ObservableObject, Identifiable, Hashable {
   let id: String
   @Published var text: NSAttributedString
   @Published var context: RichTextContext
   @Published var desiredHeight: CGFloat
+  let richTextEditorStyle: RichTextEditorStyle
+  private var cancellables = Set<AnyCancellable>()
   
   init() {
     self.id = UUID().uuidString
-    self.text = NSAttributedString(string: "Type here...")
+    self.text = NSAttributedString(string: "")
     self.context = RichTextContext()
     self.desiredHeight = 0
+    let uiFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+    
+    self.richTextEditorStyle = RichTextEditorStyle(font: uiFont)
+    
+    self.context.actionPublisher.sink(receiveValue: { action in
+      print("New actions: \(action)")
+    }).store(in: &cancellables)
   }
   
   static func == (lhs: EditorData, rhs: EditorData) -> Bool {

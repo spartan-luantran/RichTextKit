@@ -12,7 +12,7 @@ struct TestView: View {
   
   @StateObject var viewModel = TestViewModel()
   
-  @State private var texts: [NSAttributedString] = Array(repeating: NSAttributedString(string: "Type here..."), count: 5)
+  @State private var texts: [NSAttributedString] = Array(repeating: NSAttributedString(string: ""), count: 5)
   @StateObject private var contexts = RichTextContexts(count: 5)
   @State private var desiredHeights: [CGFloat] = Array(repeating: 24, count: 5)
   
@@ -22,39 +22,20 @@ struct TestView: View {
   var body: some View {
     VStack {
       ScrollView {
-        VStack(spacing: 16) {
+        LazyVStack(alignment: .leading, spacing: 8) {
           ForEach(viewModel.datas, id: \.id) { data in
             RichTextEditorWrapper2(
               data: data,
               context: data.context,
               onEditingChanged: { editing in
-                
+                print("Is Editing: \(editing)")
               }
             )
           }
-          /*
-          ForEach(0..<numberOfEditors, id: \.self) { index in
-            RichTextEditorWrapper(
-              text: $texts[index],
-              context: contexts.contexts[index],
-              desiredHeight: $desiredHeights[index],
-              onEditingChanged: { editing in
-                if editing {
-                  selectedEditorIndex = index
-                }
-              }
-            )
-            .background(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(selectedEditorIndex == index ? Color.blue : Color.gray, lineWidth: selectedEditorIndex == index ? 2 : 1)
-            )
-            .padding(.horizontal)
-           
-          }*/
         }
-        .padding(.top)
+        .padding(EdgeInsets(top: 12, leading: 24, bottom: 24, trailing: 24))
       }
-      
+      .scrollIndicators(.never)
       HStack {
         Button(action: {
           //applyBold()

@@ -64,6 +64,8 @@ extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
+        case .newLine:
+          break
         }
     }
 }

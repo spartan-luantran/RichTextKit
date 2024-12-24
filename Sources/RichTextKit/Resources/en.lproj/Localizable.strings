@@ -86,3 +86,5 @@
 "textAlignmentRight" = "Right";
 "textAlignmentCentered" = "Centered";
 "textAlignmentJustified" = "Justified";
+
+"newLine" = "newLine";

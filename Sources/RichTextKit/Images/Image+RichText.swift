@@ -60,6 +60,8 @@ public extension Image {
 
     static let richTextSuperscriptDecrease = symbol("textformat.subscript")
     static let richTextSuperscriptIncrease = symbol("textformat.superscript")
+  
+    static let richTextNewLine = symbol("arrow.down.to.line.compact")
 }
 
 public extension Image {

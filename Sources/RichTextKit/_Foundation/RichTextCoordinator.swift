@@ -80,6 +80,22 @@ open class RichTextCoordinator: NSObject {
       }
         
     }
+  
+  open func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    if text == "\n" {
+      let fullText = textView.text ?? ""
+      guard let swiftRange = Range(range, in: fullText) else {
+        return false
+      }
+      let firstLine = String(fullText[..<swiftRange.lowerBound])
+      let secondLine = String(fullText[swiftRange.lowerBound...])
+      
+      textView.text = firstLine
+      self.context.actionPublisher.send(.newLine(secondLine))
+      return false
+    }
+    return true
+  }
 
     open func textViewDidChange(_ textView: UITextView) {
         syncWithTextView()
