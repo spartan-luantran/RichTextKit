@@ -76,6 +76,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             allowsEditingTextAttributes = configuration.allowsEditingTextAttributes
             autocapitalizationType = configuration.autocapitalizationType
             spellCheckingType = configuration.spellCheckingType
+          returnKeyType = configuration.returnKeyType
         }
     }
 
