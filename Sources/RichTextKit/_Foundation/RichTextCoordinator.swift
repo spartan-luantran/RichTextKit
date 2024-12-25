@@ -91,6 +91,7 @@ open class RichTextCoordinator: NSObject {
       let secondLine = String(fullText[swiftRange.lowerBound...])
       
       textView.text = firstLine
+      syncWithTextView()
       self.context.actionPublisher.send(.newLine(secondLine))
       return false
     }
