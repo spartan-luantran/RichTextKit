@@ -90,6 +90,9 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
   
     /// New line
     case newLine(_ text: String)
+  
+    /// Delete at the beginning
+    case deleteAtBegin
 }
 
 public extension RichTextAction {
@@ -127,6 +130,7 @@ public extension RichTextAction {
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextUndo
         case .newLine: .richTextNewLine
+        case .deleteAtBegin: .richTextDeleteAtBeginning
         }
     }
 
@@ -181,6 +185,7 @@ public extension RichTextAction {
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
         case .newLine: RTKL10n.done
+        case .deleteAtBegin: RTKL10n.done
         }
     }
 }

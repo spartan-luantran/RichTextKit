@@ -97,6 +97,12 @@ open class RichTextCoordinator: NSObject {
       }
       return false
     }
+    // Handle "Delete" (Backspace) at beginning when user is deleting at the first character
+    if text.isEmpty && range.length == 0 && range.location == 0 {
+      DispatchQueue.main.async {
+        self.context.actionPublisher.send(.deleteAtBegin)
+      }
+    }
     return true
   }
 

@@ -66,6 +66,8 @@ extension RichTextCoordinator {
             syncContextWithTextView()
         case .newLine:
           break
+        case .deleteAtBegin:
+          break
         }
     }
 }

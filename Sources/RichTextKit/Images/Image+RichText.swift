@@ -62,6 +62,7 @@ public extension Image {
     static let richTextSuperscriptIncrease = symbol("textformat.superscript")
   
     static let richTextNewLine = symbol("arrow.down.to.line.compact")
+    static let richTextDeleteAtBeginning = symbol("delete.backward")
 }
 
 public extension Image {
