@@ -42,7 +42,7 @@ public class RichTextContext: ObservableObject {
     public internal(set) var attributedString = NSAttributedString()
 
     /// The currently selected range, if any.
-    public internal(set) var selectedRange = NSRange()
+    @Published public internal(set) var selectedRange = NSRange()
 
     // MARK: - Bindable & Settable Properies
 
