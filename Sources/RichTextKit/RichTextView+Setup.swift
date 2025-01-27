@@ -28,6 +28,7 @@ extension RichTextView {
         font = theme.font
         textColor = theme.fontColor
         backgroundColor = theme.backgroundColor
+      setUpPlaceholder(font: theme.placeholderFont, color: theme.placeholderColor)
     }
 }
 #endif

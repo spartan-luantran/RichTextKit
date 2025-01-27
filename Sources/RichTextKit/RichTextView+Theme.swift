@@ -22,16 +22,22 @@ public extension RichTextView {
         public init(
             font: FontRepresentable = .systemFont(ofSize: 16),
             fontColor: ColorRepresentable = .textColor,
-            backgroundColor: ColorRepresentable = .clear
+            backgroundColor: ColorRepresentable = .clear,
+            placeholderFont: FontRepresentable? = nil,
+            placeholderColor: ColorRepresentable = .textColor.withAlphaComponent(0.8)
         ) {
             self.font = font
             self.fontColor = fontColor
             self.backgroundColor = backgroundColor
+          self.placeholderFont = placeholderFont ?? font
+          self.placeholderColor = placeholderColor
         }
 
         public let font: FontRepresentable
         public let fontColor: ColorRepresentable
         public let backgroundColor: ColorRepresentable
+      public let placeholderFont: FontRepresentable
+      public let placeholderColor: ColorRepresentable
     }
 }
 

@@ -67,6 +67,7 @@ public struct RichTextEditor: ViewRepresentable {
         context: RichTextContext,
         format: RichTextDataFormat = .archivedData,
         desiredHeight: Binding<CGFloat>,
+        placeholder: String = "",
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
@@ -74,6 +75,7 @@ public struct RichTextEditor: ViewRepresentable {
         self.format = format
         self.viewConfiguration = viewConfiguration
       self._desiredHeight = desiredHeight
+      self.textView.placeholder = placeholder
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void

@@ -12,10 +12,6 @@ struct TestView: View {
   
   @StateObject var viewModel = TestViewModel()
   
-  @State private var texts: [NSAttributedString] = Array(repeating: NSAttributedString(string: ""), count: 5)
-  @StateObject private var contexts = RichTextContexts(count: 5)
-  @State private var desiredHeights: [CGFloat] = Array(repeating: 24, count: 5)
-  
   @State private var selectedEditorIndex: Int? = nil
   @State var selectedContext: RichTextContext?
   
@@ -30,7 +26,7 @@ struct TestView: View {
               onEditingChanged: { editing in
                 print("Is Editing: \(editing)")
               }
-            )
+            ).border(.gray)
           }
         }
         .padding(EdgeInsets(top: 12, leading: 24, bottom: 24, trailing: 24))
@@ -38,9 +34,7 @@ struct TestView: View {
       .scrollIndicators(.never)
       HStack {
         Button(action: {
-          //applyBold()
-          // applyAlignCenter()
-          viewModel.addMore()
+          viewModel.applyBold()
         }) {
           Text("AlignCenter")
             .fontWeight(.bold)
@@ -53,18 +47,6 @@ struct TestView: View {
     }
     .padding()
     .navigationTitle("Rich Text Editors")
-  }
-  
-  private func applyBold() {
-    guard let index = selectedEditorIndex else { return }
-    
-    contexts.contexts[index].handle(.setStyle(.bold, true))
-  }
-  
-  private func applyAlignCenter() {
-    guard let index = selectedEditorIndex else { return }
-    
-    contexts.contexts[index].handle(.setAlignment(.center))
   }
 }
 

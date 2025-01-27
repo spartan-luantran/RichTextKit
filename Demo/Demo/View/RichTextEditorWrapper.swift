@@ -13,13 +13,17 @@ struct RichTextEditorWrapper: View {
     @ObservedObject var context: RichTextContext
     @Binding var desiredHeight: CGFloat
   var onEditingChanged: (_ isEditing: Bool) -> Void
+  
+  let style = RichTextEditorStyle(font: UIFont.systemFont(ofSize: 24, weight: .bold))
     
     var body: some View {
         RichTextEditor(
             text: $text,
             context: context,
-            desiredHeight: $desiredHeight
+            desiredHeight: $desiredHeight,
+            placeholder: "Placeholder text..."
         )
+        .richTextEditorStyle(style)
         .focusedValue(\.richTextContext, context)
         .border(Color.yellow)
         .richTextEditorConfig(RichTextEditorConfig(isScrollingEnabled: false))
@@ -42,16 +46,12 @@ struct RichTextEditorWrapper2: View {
     RichTextEditor(
       text: $data.text,
       context: context,
-      desiredHeight: $desiredHeight
+      desiredHeight: $desiredHeight,
+      placeholder: "Placeholder..."
     )
     .focusedValue(\.richTextContext, context)
-    .border(Color.yellow)
     .richTextEditorConfig(RichTextEditorConfig(isScrollingEnabled: false))
     .richTextEditorStyle(data.richTextEditorStyle)
-    .frame(height: max(desiredHeight, 24))
-    .onChange(of: context.isEditingText) { isEditing in
-      print("isEditing: \(isEditing)")
-      onEditingChanged(isEditing)
-    }
+    .frame(height: max(desiredHeight, 124))
   }
 }

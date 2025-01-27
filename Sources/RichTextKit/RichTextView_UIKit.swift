@@ -26,7 +26,34 @@ extension RichTextView: UIDropInteractionDelegate {}
  */
 open class RichTextView: UITextView, RichTextViewComponent {
 
+  /// The label used as a placeholder in the text view.
+  private let placeholderLabel = UILabel()
+  
+  /// The placeholder text to display when the text view is empty.
+  public var placeholder: String? {
+    get { placeholderLabel.text }
+    set {
+      placeholderLabel.text = newValue
+      setNeedsLayout()
+    }
+  }
+  
+  public func setUpPlaceholder(font: FontRepresentable, color: ColorRepresentable) {
+    placeholderLabel.font = font
+    placeholderLabel.textColor = color
+  }
+  
     // MARK: - Initializers
+  
+  public override init(frame: CGRect, textContainer: NSTextContainer?) {
+    super.init(frame: frame, textContainer: textContainer)
+    setupPlaceholderLabel()
+  }
+  
+  public required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    setupPlaceholderLabel()
+  }
 
     public convenience init(
         data: Data,
@@ -45,6 +72,43 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
 
     // MARK: - Essentials
+  
+  private func setupPlaceholderLabel() {
+    placeholderLabel.text = ""
+    placeholderLabel.textColor = textColor
+    placeholderLabel.numberOfLines = 0
+    placeholderLabel.font = self.font ?? UIFont.systemFont(ofSize: 14)
+    placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+    addSubview(placeholderLabel)
+    
+    // Constraints that mimic text insets
+    NSLayoutConstraint.activate([
+      placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: textContainerInset.left + 4),
+      placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(textContainerInset.right + 4)),
+      placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: textContainerInset.top),
+    ])
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(textDidChangeNotification),
+      name: UITextView.textDidChangeNotification,
+      object: self
+    )
+  }
+  
+  @objc private func textDidChangeNotification() {
+    updatePlaceholderVisibility()
+  }
+  
+  private func updatePlaceholderVisibility() {
+    print("updatePlaceholderVisibility \(text.isEmpty)")
+    placeholderLabel.isHidden = !text.isEmpty
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
 
     /// Get the frame of a certain range.
     open func frame(of range: NSRange) -> CGRect {
@@ -396,7 +460,10 @@ public extension RichTextView {
     /// Get the rich text managed by the text view.
     var attributedString: NSAttributedString {
         get { super.attributedText ?? NSAttributedString(string: "") }
-        set { attributedText = newValue }
+        set {
+          attributedText = newValue
+          updatePlaceholderVisibility()
+        }
     }
 }
 

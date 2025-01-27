@@ -23,13 +23,9 @@ class EditorData: ObservableObject, Identifiable, Hashable {
     self.text = NSAttributedString(string: "")
     self.context = RichTextContext()
     self.desiredHeight = 0
-    let uiFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+    let uiFont = UIFont.systemFont(ofSize: 24, weight: .bold)
     
-    self.richTextEditorStyle = RichTextEditorStyle(font: uiFont)
-    
-    self.context.actionPublisher.sink(receiveValue: { action in
-      print("New actions: \(action)")
-    }).store(in: &cancellables)
+    self.richTextEditorStyle = RichTextEditorStyle(font: uiFont, placeholderFont: uiFont, placeholderColor: .red)
   }
   
   static func == (lhs: EditorData, rhs: EditorData) -> Bool {
@@ -47,7 +43,7 @@ final class TestViewModel: ObservableObject {
   @Published var selectedContext: RichTextContext? = nil
   
   init() {
-    for _ in 0..<5 {
+    for _ in 0..<3 {
       datas.append(EditorData())
     }
   }
@@ -56,5 +52,8 @@ final class TestViewModel: ObservableObject {
     let data = EditorData()
     data.context.toggleIsEditing()
     datas.append(data)
+  }
+  
+  func applyBold() {
   }
 }
