@@ -9,6 +9,7 @@ import RichTextKit
 import Combine
 import Foundation
 import UIKit
+import SwiftUICore
 
 class EditorData: ObservableObject, Identifiable, Hashable {
   let id: String
@@ -20,7 +21,7 @@ class EditorData: ObservableObject, Identifiable, Hashable {
   
   init() {
     self.id = UUID().uuidString
-    self.text = NSAttributedString(string: "")
+    self.text = NSAttributedString(string: "Oi con song que con song que")
     self.context = RichTextContext()
     self.desiredHeight = 0
     let uiFont = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -34,6 +35,17 @@ class EditorData: ObservableObject, Identifiable, Hashable {
   
   func hash(into hasher: inout Hasher) {
     hasher.combine(id)
+  }
+  
+  var attributedStringBinding: Binding<NSAttributedString> {
+    Binding<NSAttributedString>(
+      get: {
+        return self.text
+      },
+      set: { newValue in
+        self.text = newValue
+      }
+    )
   }
 }
 

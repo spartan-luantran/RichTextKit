@@ -44,7 +44,7 @@ struct RichTextEditorWrapper2: View {
   
   var body: some View {
     RichTextEditor(
-      text: $data.text,
+      text: data.attributedStringBinding,
       context: context,
       desiredHeight: $desiredHeight,
       placeholder: "Placeholder..."
