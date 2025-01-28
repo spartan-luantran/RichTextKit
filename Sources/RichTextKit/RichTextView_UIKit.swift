@@ -104,11 +104,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
   }
   
   @objc private func textDidChangeNotification() {
+    print("textDidChangeNotification")
     updatePlaceholderVisibility()
   }
   
   private func updatePlaceholderVisibility() {
-    print("updatePlaceholderVisibility \(text) \(text.isEmpty)")
+    print("updatePlaceholderVisibility \(text) \(attributedString) \(text.isEmpty)")
     placeholderLabel.isHidden = !text.isEmpty || attributedString.length > 0
   }
   
@@ -468,6 +469,7 @@ public extension RichTextView {
         get { super.attributedText ?? NSAttributedString(string: "") }
         set {
           attributedText = newValue
+          print("attributedString setter")
           updatePlaceholderVisibility()
         }
     }
