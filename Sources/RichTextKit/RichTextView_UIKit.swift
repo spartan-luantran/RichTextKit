@@ -43,6 +43,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
     placeholderLabel.textColor = color
   }
   
+  public override var text: String! {
+    didSet {
+      updatePlaceholderVisibility()
+    }
+  }
+  
     // MARK: - Initializers
   
   public override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -102,8 +108,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
   }
   
   private func updatePlaceholderVisibility() {
-    print("updatePlaceholderVisibility \(text.isEmpty)")
-    placeholderLabel.isHidden = !text.isEmpty
+    print("updatePlaceholderVisibility \(text) \(text.isEmpty)")
+    placeholderLabel.isHidden = !text.isEmpty || attributedString.length > 0
   }
   
   deinit {
