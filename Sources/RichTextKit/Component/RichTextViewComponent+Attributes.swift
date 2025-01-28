@@ -43,6 +43,18 @@ public extension RichTextViewComponent {
             typingAttributes[attribute] = value
         }
     }
+  
+  /// Set selected attributes
+  func setSelectedRichTextAttributes(
+    _ attributes: RichTextAttributes
+  ) {
+    if !hasSelectedRange {
+      return
+    }
+    attributes.forEach { attribute, value in
+      setRichTextAttribute(attribute, to: value, at: selectedRange)
+    }
+  }
 
     /// Set certain attributes.
     func setRichTextAttributes(

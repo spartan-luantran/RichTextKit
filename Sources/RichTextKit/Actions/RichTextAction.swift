@@ -93,6 +93,9 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
   
     /// Delete at the beginning
     case deleteAtBegin
+  
+  /// Set url at selected range
+  case setURL(_ url: URL)
 }
 
 public extension RichTextAction {
@@ -131,6 +134,7 @@ public extension RichTextAction {
         case .undoLatestChange: .richTextUndo
         case .newLine: .richTextNewLine
         case .deleteAtBegin: .richTextDeleteAtBeginning
+        case .setURL: .richTextURL
         }
     }
 
@@ -186,6 +190,7 @@ public extension RichTextAction {
         case .undoLatestChange: .actionUndoLatestChange
         case .newLine: RTKL10n.done
         case .deleteAtBegin: RTKL10n.done
+        case .setURL: RTKL10n.done
         }
     }
 }

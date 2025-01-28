@@ -61,6 +61,7 @@ extension RichTextCoordinator {
             textView.stepRichTextSuperscriptLevel(points: points)
         case .toggleStyle(let style):
             textView.toggleRichTextStyle(style)
+          syncWithTextView()
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
@@ -68,6 +69,9 @@ extension RichTextCoordinator {
           break
         case .deleteAtBegin:
           break
+        case .setURL(let url):
+          textView.setSelectedRichTextAttributes([.link: url, .underlineStyle: 1])
+          syncTextWithTextView()
         }
     }
 }

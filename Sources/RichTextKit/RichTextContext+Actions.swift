@@ -46,6 +46,7 @@ public extension RichTextContext {
         case .undoLatestChange: canUndoLatestChange
         case .newLine: true
         case .deleteAtBegin: true
+        case .setURL: true
         }
     }
 

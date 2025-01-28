@@ -63,6 +63,7 @@ public extension Image {
   
     static let richTextNewLine = symbol("arrow.down.to.line.compact")
     static let richTextDeleteAtBeginning = symbol("delete.backward")
+  static let richTextURL = symbol("link")
 }
 
 public extension Image {

@@ -41,10 +41,20 @@ final class TestViewModel: ObservableObject {
   // Outputs
   @Published var datas: [EditorData] = []
   @Published var selectedContext: RichTextContext? = nil
+  private var cancellables = Set<AnyCancellable>()
   
   init() {
     for _ in 0..<3 {
       datas.append(EditorData())
+    }
+    
+    for data in datas {
+      data.context.$isEditingText.sink(receiveValue: { isEditing in
+        guard isEditing else {
+          return
+        }
+        self.selectedContext = data.context
+      }).store(in: &cancellables)
     }
   }
   
@@ -55,5 +65,8 @@ final class TestViewModel: ObservableObject {
   }
   
   func applyBold() {
+    let url = URL(string: "https://google.com")!
+    //selectedContext?.handle(.setURL(url))
+    selectedContext?.handle(.setColor(.background, .red))
   }
 }
