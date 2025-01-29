@@ -49,6 +49,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
   }
   
+  public override var attributedText: NSAttributedString! {
+    didSet {
+      updatePlaceholderVisibility()
+    }
+  }
+  
     // MARK: - Initializers
   
   public override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -94,27 +100,10 @@ open class RichTextView: UITextView, RichTextViewComponent {
       placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(textContainerInset.right + 4)),
       placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: textContainerInset.top),
     ])
-    
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(textDidChangeNotification),
-      name: UITextView.textDidChangeNotification,
-      object: self
-    )
-  }
-  
-  @objc private func textDidChangeNotification() {
-    print("textDidChangeNotification")
-    updatePlaceholderVisibility()
   }
   
   private func updatePlaceholderVisibility() {
-    print("updatePlaceholderVisibility \(text) \(attributedString) \(text.isEmpty)")
-    placeholderLabel.isHidden = !text.isEmpty || attributedString.length > 0
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
+    placeholderLabel.isHidden = !text.isEmpty
   }
 
     /// Get the frame of a certain range.
@@ -469,8 +458,6 @@ public extension RichTextView {
         get { super.attributedText ?? NSAttributedString(string: "") }
         set {
           attributedText = newValue
-          print("attributedString setter")
-          updatePlaceholderVisibility()
         }
     }
 }

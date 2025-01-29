@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740689B42D49AA3500AE2A50 /* NSAtrributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740689B32D49AA2800AE2A50 /* NSAtrributedString.swift */; };
 		74F5A9AB2D0D357C00DAE134 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F5A9AA2D0D357C00DAE134 /* TestView.swift */; };
 		74F5A9AF2D0E4CE100DAE134 /* RichTextEditorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F5A9AE2D0E4CE100DAE134 /* RichTextEditorWrapper.swift */; };
 		74F5A9B12D0E4D4600DAE134 /* RichTextContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F5A9B02D0E4D4600DAE134 /* RichTextContexts.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		740689B32D49AA2800AE2A50 /* NSAtrributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAtrributedString.swift; sourceTree = "<group>"; };
 		74F5A9AA2D0D357C00DAE134 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		74F5A9AE2D0E4CE100DAE134 /* RichTextEditorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorWrapper.swift; sourceTree = "<group>"; };
 		74F5A9B02D0E4D4600DAE134 /* RichTextContexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextContexts.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 		A9D8C48E2BB5C40400F77A36 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				740689B32D49AA2800AE2A50 /* NSAtrributedString.swift */,
 				A98395752B9669CB00727A30 /* ViewDebug.swift */,
 			);
 			path = Utils;
@@ -444,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74F5A9AF2D0E4CE100DAE134 /* RichTextEditorWrapper.swift in Sources */,
+				740689B42D49AA3500AE2A50 /* NSAtrributedString.swift in Sources */,
 				A98395762B9669CB00727A30 /* ViewDebug.swift in Sources */,
 				A98395742B96684500727A30 /* AboutCommand.swift in Sources */,
 				74F5A9BB2D0F5F6C00DAE134 /* TestViewModel.swift in Sources */,

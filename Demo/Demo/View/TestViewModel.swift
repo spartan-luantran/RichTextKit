@@ -21,12 +21,20 @@ class EditorData: ObservableObject, Identifiable, Hashable {
   
   init() {
     self.id = UUID().uuidString
-    self.text = NSAttributedString(string: "Oi con song que con song que")
+    self.text = NSAttributedString()
     self.context = RichTextContext()
     self.desiredHeight = 0
     let uiFont = UIFont.systemFont(ofSize: 24, weight: .bold)
     
     self.richTextEditorStyle = RichTextEditorStyle(font: uiFont, placeholderFont: uiFont, placeholderColor: .red)
+    
+    let content = "Oi con song que con song que"
+    NSAttributedString.fromHTML(content, uniformFont: uiFont) { [weak self] attributedString in
+      guard let self else {
+        return
+      }
+      self.text = attributedString
+    }
   }
   
   static func == (lhs: EditorData, rhs: EditorData) -> Bool {
